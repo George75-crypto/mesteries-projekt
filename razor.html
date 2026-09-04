@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vicces Oldal</title>
+    <link rel="stylesheet" href="razor.css">
+</head>
+<body>
+
+<div class="doboz">
+    <h1>GRATULÁLOK SIKERESEN FELTÖRTÉL</h1>
+    <h2>Semmit nem kapsz érte de azért ügyes vagy</h2>
+    <img src="bejutott.webp" alt="">
+</div>
+
+<script src="script.js"></script>
+<script>
+const user = localStorage.getItem("user");
+
+if(!user){
+    window.location.href = "index.html";
+}
+</script>
+</body>
+</html>

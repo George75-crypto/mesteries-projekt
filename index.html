@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bejelentkezés</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page-title">
+    <h1>RAZORBET</h1>
+    <p>A következő generáció sportfogadása</p>
+    </div>
+    <div class="login-container">
+        <h1>Bejelentkezés</h1>
+
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Felhasználónév" required>
+
+            <input type="password" id="password" placeholder="Jelszó" required>
+
+            <button type="submit">Belépés</button>
+
+            <p id="message"></p>
+
+            <p>Még nincs fiókod?</p>
+        <button type="button" onclick="window.location.href='reg.html'">
+            <p>Regisztráció</p>
+        </button>
+
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

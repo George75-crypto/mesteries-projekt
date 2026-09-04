@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regisztráció</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="login-container">
+    <h1>Regisztráció</h1>
+
+    <form id="registerForm">
+
+        <input type="text" id="regUsername"
+        placeholder="Felhasználónév" required>
+
+        <input type="email" id="email"
+        placeholder="Email cím" required>
+
+        <input type="password" id="regPassword"
+        placeholder="Jelszó" required>
+
+        <button type="submit">Regisztráció</button>
+
+        <p id="registerMessage"></p>
+
+    </form>
+</div>
+
+<script src="reg.js"></script>
+
+</body>
+</html>
