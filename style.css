@@ -1,80 +1,313 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ------------------------------------------------------------
+   Bejelentkezési oldal – stílusok
+   A színek és a méretek a :root-ban vannak, ott könnyű átírni őket.
+   ------------------------------------------------------------ */
+
+:root {
+  --fog:       #edf1f4;  /* oldal háttere */
+  --chalk:     #ffffff;  /* mezők, kártya */
+  --ink:       #12303b;  /* szöveg */
+  --muted:     #4c6470;  /* másodlagos szöveg */
+  --line:      #6f8797;  /* mezők kerete */
+  --track:     #dce3e9;  /* a váltó háttere */
+  --tide:      #0e7c86;  /* fő szín: gombok, fókusz */
+  --tide-deep: #0a5f67;
+  --marigold:  #f4b63f;  /* a kártya felső sávja */
+  --error:     #b3261e;
+  --error-bg:  #fcecea;
+  --error-ink: #7a1712;
+  --ok-bg:     #e3f3f1;
+  --ok-ink:    #0b4a50;
 }
 
-body{
-    background-image: url(background.png);
-    background-repeat: no-repeat;
-    background-size:cover;
-    background-position:center;
-    background-attachment:fixed;
-    font-family: Arial;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-.login-container{
-    background-color: white;
-    width: 300px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
-h1{
-    margin-bottom: 20px;
+body {
+  margin: 0;
+  background: var(--fog);
+  color: var(--ink);
+  font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system,
+               "Helvetica Neue", Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.55;
 }
 
-input{
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid gray;
-    border-radius: 5px;
+/* ---------- Oldalváz: bal oldalon a cím, jobb oldalon az űrlap ---------- */
+
+.shell {
+  width: min(100% - 2.5rem, 62rem);
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding-block: 2.5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: clamp(2rem, 6vw, 5rem);
+  align-content: center;
+  align-items: start;
 }
 
-button{
-    width: 100%;
-    padding: 10px;
-    margin-top: 15px;
-    background-color: dodgerblue;
-    color: white;
-    border: none;
-    border-radius: 5px;
+@media (max-width: 52rem) {
+  .shell {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+    gap: 1.5rem;
+  }
 }
 
-button:hover{
-    background-color: blue;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-weight: 800;
+  letter-spacing: 0.02em;
 }
 
-#message{
-    margin-top: 10px;
-    color: red;
+.brand::before {
+  content: "";
+  width: 0.8rem;
+  height: 0.8rem;
+  border-radius: 50%;
+  background: var(--marigold);
 }
 
-.page-title{
-    position:absolute;
-    top:80px;
-
-    text-align:center;
-    color:white;
+h1 {
+  margin: clamp(1.5rem, 6vw, 3.5rem) 0 1rem;
+  font-size: clamp(2.75rem, 8vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  overflow-wrap: anywhere;
 }
 
-.page-title h1{
-    font-size:60px;
-    color:#22c55e;
-
-    text-shadow:
-    0 0 15px rgba(34,197,94,0.6);
-
-    margin-bottom:10px;
+.lead {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.125rem;
 }
 
-.page-title p{
-    font-size:18px;
-    color:#d1d5db;
+/* ---------- Váltó: Bejelentkezés / Regisztráció ---------- */
+
+.switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+  margin-bottom: 1.5rem;
+  padding: 0.25rem;
+  background: var(--track);
+  border-radius: 0.75rem;
+}
+
+.switch a {
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  color: var(--muted);
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.switch a:hover {
+  color: var(--ink);
+}
+
+.switch a[aria-current="page"] {
+  background: var(--chalk);
+  color: var(--ink);
+  box-shadow: 0 1px 2px rgba(18, 48, 59, 0.2);
+}
+
+/* ---------- Űrlap ---------- */
+
+label {
+  display: block;
+  margin: 1.1rem 0 0.4rem;
+  font-weight: 600;
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 2px solid var(--line);
+  border-radius: 0.5rem;
+  background: var(--chalk);
+  color: var(--ink);
+  font: inherit;
+}
+
+input:hover {
+  border-color: var(--ink);
+}
+
+input:focus {
+  border-color: var(--tide);
+  outline: 3px solid rgba(14, 124, 134, 0.3);
+  outline-offset: 0;
+}
+
+.hint {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.btn {
+  width: 100%;
+  margin-top: 1.75rem;
+  padding: 0.9rem 1rem;
+  border: 2px solid var(--tide);
+  border-radius: 0.5rem;
+  background: var(--tide);
+  color: #ffffff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: var(--tide-deep);
+  background: var(--tide-deep);
+}
+
+.btn--quiet {
+  border-color: var(--ink);
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn--quiet:hover {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: #ffffff;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--tide);
+  outline-offset: 3px;
+}
+
+/* ---------- Üzenetek ---------- */
+
+.alert {
+  margin: 0 0 1.25rem;
+  padding: 0.85rem 1rem;
+  border-left: 5px solid;
+  border-radius: 0.5rem;
+}
+
+.alert ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.alert li + li {
+  margin-top: 0.4rem;
+}
+
+.alert--error {
+  border-color: var(--error);
+  background: var(--error-bg);
+  color: var(--error-ink);
+}
+
+.alert--ok {
+  border-color: var(--tide);
+  background: var(--ok-bg);
+  color: var(--ok-ink);
+}
+
+/* ---------- Fiókkártya (bejelentkezés után) ---------- */
+
+.badge {
+  overflow: hidden;
+  border: 2px solid var(--ink);
+  border-radius: 1.25rem;
+  background: var(--chalk);
+  transform-origin: 50% 0;
+  animation: badge-swing 0.9s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+}
+
+.badge__top {
+  display: grid;
+  place-items: center;
+  height: 4.5rem;
+  background: var(--marigold);
+}
+
+.badge__slot {
+  width: 4rem;
+  height: 0.9rem;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--fog);
+}
+
+.badge__body {
+  padding: 1.5rem 1.5rem 1.25rem;
+}
+
+.badge__name {
+  margin: 0;
+  font-size: clamp(1.6rem, 5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.badge__mail {
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.badge__meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-top: 2px dashed var(--line);
+}
+
+.badge__meta dt {
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+.badge__meta dd {
+  margin: 0;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.logout .btn {
+  margin-top: 1.5rem;
+}
+
+/* A kártya egyszer, oldalbetöltéskor „beleng” fentről */
+@keyframes badge-swing {
+  from {
+    opacity: 0;
+    transform: translateY(-1.5rem) rotate(-3deg);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    animation: none;
+  }
 }
