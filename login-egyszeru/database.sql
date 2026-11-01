@@ -1,0 +1,32 @@
+CREATE DATABASE IF NOT EXISTS login_egyszeru
+  CHARACTER SET utf8mb4
+  COLLATE utf8mb4_unicode_ci;
+
+USE login_egyszeru;
+
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+  id         INT AUTO_INCREMENT PRIMARY KEY,
+  nev        VARCHAR(30)  NOT NULL UNIQUE,
+  email      VARCHAR(100) NOT NULL UNIQUE,
+  jelszo     VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4;
+
+DROP TABLE IF EXISTS bejelentkezesek;
+
+CREATE TABLE bejelentkezesek (
+  id      INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT       NOT NULL,
+  ido     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4;
+
+DROP TABLE IF EXISTS uzenetek;
+
+CREATE TABLE uzenetek (
+  id      INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT          NOT NULL,
+  szoveg  TEXT         NOT NULL,
+  ido     TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4;
